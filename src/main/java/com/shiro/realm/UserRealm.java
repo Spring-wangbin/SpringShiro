@@ -2,6 +2,7 @@ package com.shiro.realm;
 
 import com.shiro.dao.IUserDao;
 import com.shiro.model.User;
+import com.shiro.service.IUserService;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -14,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class UserRealm extends AuthorizingRealm {
 
     @Autowired
-    private IUserDao userDao;
+    private IUserService userService;
 
     //授权
 
@@ -29,7 +30,7 @@ public class UserRealm extends AuthorizingRealm {
 
         //从token中获取登录的用户名，查询数据库返回用户信息
         String username = (String) token.getPrincipal();
-        User user = userDao.getUserByUsername(username);
+        User user = userService.getUserByUsername(username);
 
         if(user == null){
             return null;
