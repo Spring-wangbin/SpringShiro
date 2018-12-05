@@ -10,14 +10,23 @@
                         http://www.springframework.org/schema/mvc    
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
-    <!--加载配置文件-->
-    <context:property-placeholder ignore-unresolvable="true" location="classpath:"/>
+    <!--配置自定义realm-->
+    <bean id="userRealm" class="com.shiro.realm.UserRealm"/>
 
-    <bean name="shiroFilterChainDefinitions" class="java.lang.String">
-        <constructor-arg>
+    <!--配置安全管理器 SecurityManager-->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="userRealm"/>
+    </bean>
+
+    <!--定义真正的shirofilter 过滤器(web.xml配置的为代理)-->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <property name="loginUrl" value="/login"/>
+        <property name="unauthorizedUrl" value="/nopermission.jsp"/>
+        <property name="filterChainDefinitions">
             <value>
-                /login = authc
+                /**=authc
             </value>
-        </constructor-arg>
+        </property>
     </bean>
 </beans>

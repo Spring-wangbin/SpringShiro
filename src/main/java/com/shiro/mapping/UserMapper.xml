@@ -17,4 +17,11 @@
         from users
         where uid = #{uid}
     </select>
+
+    <select id="getUserByUsername" resultMap="UserResult" parameterType="String">
+        select
+        <include refid="Base_Column_List"/>
+        from users
+        where username = #{username}
+    </select>
 </mapper>

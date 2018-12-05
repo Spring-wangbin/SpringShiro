@@ -4,4 +4,6 @@ import com.shiro.model.User;
 
 public interface IUserService {
     public User getUserById(int uid);
+
+    public User getUserByUsername(String username);
 }
