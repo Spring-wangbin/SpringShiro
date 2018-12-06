@@ -82,4 +82,5 @@
           depends-on="lifecycleBeanPostProcessor" />
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"></bean>
 
+    <!--<bean id="requestMappingHandlerMapping" class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>-->
 </beans>

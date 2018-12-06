@@ -53,6 +53,7 @@ public class UserRealm extends AuthorizingRealm {
         }
 
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user,user.getPassword(),getName());
+        System.out.println("认证成功："+info);
         return info;
     }
 

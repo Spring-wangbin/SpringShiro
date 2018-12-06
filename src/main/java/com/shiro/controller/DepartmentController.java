@@ -1,5 +1,7 @@
 package com.shiro.controller;
 
+import com.shiro.realm.PermissionName;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class DepartmentController {
 
     @RequestMapping("")
+    @RequiresPermissions("department:list")
+    @PermissionName("部门列表")
     public String index(){
 
         System.out.println("部门列表。。。");
@@ -15,6 +19,8 @@ public class DepartmentController {
     }
 
     @RequestMapping("/save")
+    @RequiresPermissions("department:save")
+    @PermissionName("部门新增")
     public String save(){
 
         System.out.println("部门新增。。。");
@@ -22,6 +28,8 @@ public class DepartmentController {
     }
 
     @RequestMapping("/edit")
+    @RequiresPermissions("department:edit")
+    @PermissionName("部门编辑")
     public String edit(){
 
         System.out.println("部门编辑。。。");
@@ -29,6 +37,8 @@ public class DepartmentController {
     }
 
     @RequestMapping("/delete")
+    @RequiresPermissions("department:delete")
+    @PermissionName("部门删除")
     public String delete(){
 
         System.out.println("部门删除。。。");
