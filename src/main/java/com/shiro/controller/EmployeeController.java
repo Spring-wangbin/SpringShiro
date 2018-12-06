@@ -1,5 +1,6 @@
 package com.shiro.controller;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -15,6 +16,7 @@ public class EmployeeController {
     }
 
     @RequestMapping("/save")
+    @RequiresPermissions("employee:save")
     public String save(){
 
         System.out.println("员工新增。。。");
@@ -22,6 +24,7 @@ public class EmployeeController {
     }
 
     @RequestMapping("/edit")
+    @RequiresPermissions("employee:edit")
     public String edit(){
 
         System.out.println("员工编辑。。。");
@@ -29,6 +32,7 @@ public class EmployeeController {
     }
 
     @RequestMapping("/delete")
+    @RequiresPermissions("employee:delete")
     public String delete(){
 
         System.out.println("员工删除。。。");

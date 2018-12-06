@@ -13,6 +13,7 @@ public class LoginController {
 
     @RequestMapping("/login")
     public String login(Model model, HttpServletRequest request){
+        System.out.println("认证失败请求方法...");
 
         //如果登录失败从request中获取认证异常信息，shiroLoginFailure就是shiro异常类的全名
         String execptionClassName = (String) request.getAttribute("shiroLoginFailure");
