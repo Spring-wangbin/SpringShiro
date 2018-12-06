@@ -57,7 +57,9 @@ public class TestMyBatis {
 
     @Test
     public void test3(){
-        List<Permission> al = permissionService.getAllPermission();
+
+        List<String> psemissionByUserid = permissionService.getPsemissionByUserid(1);
+        System.out.println(psemissionByUserid);
 
     }
 }

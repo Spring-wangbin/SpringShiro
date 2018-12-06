@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shiro.dao.IRoleDao">
+    <resultMap id="RoleResult" type="com.shiro.model.Roles">
+        <id column="rid" property="rid" jdbcType="INTEGER"/>
+        <result column="rname" property="rname" jdbcType="VARCHAR"/>
+        <result column="rmark" property="rmark" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        rid,rname,rmark
+    </sql>
+
+    <select id="getAllRoles" resultType="string">
+        select
+        rmark
+        from roles
+    </select>
+
+    <select id="getRolesById" resultMap="RoleResult" parameterType="int">
+        select
+        role_id
+        from user_role where user_id = #{uid}
+    </select>
+</mapper>

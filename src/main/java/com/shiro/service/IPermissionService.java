@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface IPermissionService {
     public int save(Permission permission);
-    public List<Permission> getAllPermission();
+    public List<String> getAllPermission();
+    public List<String> getPsemissionByUserid(int uid);
 }

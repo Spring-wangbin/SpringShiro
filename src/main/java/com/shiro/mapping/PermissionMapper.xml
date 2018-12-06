@@ -17,7 +17,11 @@
           values (#{pname},#{pmark})
     </insert>
 
-    <select id="getAllPermission" resultMap="PermissionResult">
+    <select id="getAllPermission" resultType="string">
         select pmark from permission
+    </select>
+
+    <select id="getPsemissionByUserid" resultType="string" parameterType="int">
+        select pmark from permission where pid in (select permission_id from role_permission where role_id in (select role_id from user_role where user_id = #{uid}))
     </select>
 </mapper>

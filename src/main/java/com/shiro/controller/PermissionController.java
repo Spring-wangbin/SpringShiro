@@ -32,7 +32,7 @@ public class PermissionController {
         //加载系统中所有的权限表达式，放入数据库
 
         //0:过滤掉已经加载的权限
-        List<Permission> al = permissionService.getAllPermission();
+        List<String> al = permissionService.getAllPermission();
 
         //1.获取controller中所有带有requestMapper标签的方法
         Map<RequestMappingInfo, HandlerMethod> handlerMethods =  rmhm.getHandlerMethods();
@@ -46,12 +46,7 @@ public class PermissionController {
                 continue;
             }
 
-            for (int i=0;i<al.size();i++){
-                 if (annotation.value()[0].equals(al.get(i).getPmark())) {
-                     flag = false;
-                     break;
-                 }
-            }
+            if(al.contains(annotation.value()[0])) continue;
 
                 if(flag){
                 Permission permission = new Permission();
@@ -62,7 +57,6 @@ public class PermissionController {
         }
 
         //3.如果有，解析权限表达式，封装成功permission对象保存到数据库
-
         return "main";
     }
 }

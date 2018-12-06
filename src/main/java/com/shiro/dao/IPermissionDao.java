@@ -9,5 +9,7 @@ public interface IPermissionDao {
 
     public int save(Permission permission);
 
-    public List<Permission> getAllPermission();
+    public List<String> getAllPermission();
+
+    public List<String> getPsemissionByUserid(int uid);
 }

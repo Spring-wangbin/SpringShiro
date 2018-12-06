@@ -1,7 +1,10 @@
 package com.shiro.realm;
 
 import com.shiro.model.User;
+import com.shiro.service.IPermissionService;
+import com.shiro.service.IRolesService;
 import com.shiro.service.IUserService;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -19,6 +22,10 @@ public class UserRealm extends AuthorizingRealm {
 
     @Autowired
     private IUserService userService;
+    @Autowired
+    private IRolesService rolesService;
+    @Autowired
+    private IPermissionService permissionService;
 
     //授权
 
@@ -27,16 +34,20 @@ public class UserRealm extends AuthorizingRealm {
         System.out.println("权限授予");
         User user = (User) principals.getPrimaryPrincipal();
         List<String> permissions = new ArrayList<String>();
+        List<String> roles = new ArrayList<String>();
         if(user != null){
-            if("wangbin".equals(user.getUsername())){
-                permissions.add("employee:edit");
-            }else if("admin".equals(user.getUsername())){
+            if("admin".equals(user.getUsername())){
                 permissions.add("*:*");
+                roles = rolesService.getAllRoles();
+            }else {
+                roles = rolesService.getRolesById(user.getUid());
+                permissions = permissionService.getPsemissionByUserid(user.getUid());
             }
         }
 
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         info.addStringPermissions(permissions);
+        info.addRoles(roles);
         return info;
     }
 
@@ -60,5 +71,11 @@ public class UserRealm extends AuthorizingRealm {
     @Override
     public String getName() {
         return "userRealm";
+    }
+
+    public void clearCache(){
+        /*清空缓存*/
+        PrincipalCollection principals = SecurityUtils.getSubject().getPrincipals();
+        super.clearCache(principals);
     }
 }

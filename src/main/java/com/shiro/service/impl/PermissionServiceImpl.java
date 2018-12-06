@@ -20,7 +20,12 @@ public class PermissionServiceImpl implements IPermissionService {
     }
 
     @Override
-    public List<Permission> getAllPermission() {
+    public List<String> getAllPermission() {
         return permissionDao.getAllPermission();
+    }
+
+    @Override
+    public List<String> getPsemissionByUserid(int uid) {
+        return permissionDao.getPsemissionByUserid(uid);
     }
 }
