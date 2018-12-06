@@ -9,7 +9,6 @@ public class MainController {
     @RequestMapping("/main")
     public String login(){
 
-        System.out.println("进入主页");
         return "main";
     }
 }

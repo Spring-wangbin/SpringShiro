@@ -30,8 +30,8 @@
         <property name="unauthorizedUrl" value="/nopermission.jsp"/>
         <property name="filterChainDefinitions">
             <value>
-                /**=authc
                 /logout=logout
+                /**=authc
             </value>
         </property>
     </bean>

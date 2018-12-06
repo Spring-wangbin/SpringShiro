@@ -32,4 +32,11 @@ public class LoginController {
         //登录失败返回到初始页面
         return "forward:/index.jsp";
     }
+
+    @RequestMapping("/logout")
+    public String logout(){
+
+        System.out.println("logout...");
+        return "index";
+    }
 }

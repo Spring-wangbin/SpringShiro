@@ -11,7 +11,6 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
-import java.lang.annotation.Annotation;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -41,19 +40,16 @@ public class PermissionController {
             //2.遍历所有的方法，判断当前方法是否贴有@requiresPermission注解标签
             RequiresPermissions annotation = method.getMethodAnnotation(RequiresPermissions.class);
 
-            boolean flag = true;
             if(annotation == null){
                 continue;
             }
 
             if(al.contains(annotation.value()[0])) continue;
 
-                if(flag){
-                Permission permission = new Permission();
-                permission.setPname(method.getMethodAnnotation(PermissionName.class).value());
-                permission.setPmark(annotation.value()[0]);
-                permissionService.save(permission);
-            }
+            Permission permission = new Permission();
+            permission.setPname(method.getMethodAnnotation(PermissionName.class).value());
+            permission.setPmark(annotation.value()[0]);
+            permissionService.save(permission);
         }
 
         //3.如果有，解析权限表达式，封装成功permission对象保存到数据库
